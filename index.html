@@ -7,16 +7,16 @@
     <link rel="icon" href="https://chrysm.xyz/favicon.ico" type="image/x-icon">
     <title>Chrysm</title>
     
-    <!-- Preload the background image for faster loading -->
+    <!-- Preload the background image to improve load speed -->
     <link rel="preload" href="image.png" as="image">
-    
+
     <style>
         html, body {
             overflow: hidden; /* Prevent scrolling */
             height: 100%;
             margin: 0;
-            background-color: #111; /* Fallback color to match the tone of the image */
-            background-image: none; /* Initially no background image */
+            background-color: #111; /* Dark background color to reduce flashing */
+            background-image: url('image.png'); /* Background image set initially */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -24,7 +24,7 @@
             -webkit-user-drag: none; /* Prevent image dragging */
             -moz-user-drag: none;
             -ms-user-drag: none;
-            transition: background-image 0.3s ease-in-out; /* Smooth transition when the image appears */
+            transition: background 0.3s ease-in-out; /* Smooth transition */
         }
 
         #transparent-overlay {
@@ -42,11 +42,16 @@
             -webkit-touch-callout: none; /* Prevent touch callout on mobile */
         }
     </style>
-    
+
     <script>
-        // Wait for the image to load before setting it as the background
+        // Wait for the background image to load and ensure it's instantly visible
         window.onload = function() {
-            document.body.style.backgroundImage = 'url("image.png")';
+            var img = new Image();
+            img.src = 'image.png'; // The background image path
+            img.onload = function() {
+                // Once the image is loaded, it will be applied as the background
+                document.body.style.backgroundImage = 'url("image.png")';
+            };
         };
 
         // Disable right-click context menu
