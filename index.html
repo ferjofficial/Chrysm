@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://chrysm.xyz/favicon.ico" type="image/x-icon">
     <title>Chrysm</title>
+    
+    <!-- Preload the background image for faster loading -->
+    <link rel="preload" href="image.png" as="image">
+    
     <style>
         html, body {
             overflow: hidden; /* Prevent scrolling */
             height: 100%;
             margin: 0;
-            background-image: url('image.png'); /* Background image */
+            background-color: #111; /* Fallback color to match the tone of the image */
+            background-image: none; /* Initially no background image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -19,6 +24,7 @@
             -webkit-user-drag: none; /* Prevent image dragging */
             -moz-user-drag: none;
             -ms-user-drag: none;
+            transition: background-image 0.3s ease-in-out; /* Smooth transition when the image appears */
         }
 
         #transparent-overlay {
@@ -32,13 +38,18 @@
             z-index: 1;
         }
 
-        /* Prevent right-click context menu */
         body {
             -webkit-touch-callout: none; /* Prevent touch callout on mobile */
         }
     </style>
-    <link rel="preload" href="image.png" as="image">
+    
     <script>
+        // Wait for the image to load before setting it as the background
+        window.onload = function() {
+            document.body.style.backgroundImage = 'url("image.png")';
+        };
+
+        // Disable right-click context menu
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault(); /* Disable right-click context menu */
         });
